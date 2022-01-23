@@ -1,10 +1,20 @@
-import './App.css';
+import React from "react";
+import "./App.css";
+import { TableComponent } from "./components/table";
+import { UserInfo } from "./components/userInfo";
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
- 
-
+      <Switch>
+        <Route exact path={"/"}>
+          <TableComponent />
+        </Route>
+        <Route exact path={"/:id"}>
+          <UserInfo />
+        </Route>
+      </Switch>
     </div>
   );
 }
