@@ -19,7 +19,7 @@ export const TableComponent = () => {
   const history = useHistory();
 
   async function getTableData() {
-    const req = await axios("http://151.248.112.110:3000/api/evergreen/");
+    const req = await axios("https://api.artydev.ru/api/evergreen/");
     setTableData(req.data.data);
   }
 
@@ -62,7 +62,7 @@ export const TableComponent = () => {
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
-        <h1 className={css.title}>Мониторинг авторов "Пульс"</h1>
+        <h1 className={css.title}>Мониторинг авторов "Пульса" в "Тинькофф Инвестициях"</h1>
       </div>
       <Table
         sx={{
@@ -80,9 +80,9 @@ export const TableComponent = () => {
             <StyledTableCell>Автор</StyledTableCell>
             <StyledTableCell align="right">Доходность</StyledTableCell>
             <StyledTableCell align="right">Кол-во операций</StyledTableCell>
-            <StyledTableCell align="right">Тэги</StyledTableCell>
+            <StyledTableCell align="right">Метки</StyledTableCell>
             <StyledTableCell align="right">Кол-во стратегий</StyledTableCell>
-            <StyledTableCell align="right">Кол-во подписчиков</StyledTableCell>
+            <StyledTableCell align="right">Подписчики</StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
