@@ -23,7 +23,7 @@ export const UserInfo = () => {
   const [author, setAuthor] = useState("");
 
   async function getChartInfo() {
-    const req = await axios(`http://151.248.112.110:3000/api/evergreen/${id}`);
+    const req = await axios(`https://api.artydev.ru/api/evergreen/${id}`);
     const newData = req.data.data.map((item) => ({
       name: String(item.parse_dt),
       year_relative_yield: Number(item.year_relative_yield),
@@ -64,8 +64,8 @@ export const UserInfo = () => {
           <Line
             type="natural"
             dataKey="year_relative_yield"
-            stroke="#01579b"
-            activeDot={{ r: 8 }}
+            stroke="#82ca9d"
+            activeDot={{ r: 6 }}
           />
         </LineChart>
       </div>
