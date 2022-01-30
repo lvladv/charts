@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router";
+
 import Button from "@mui/material/Button";
 import {
   LineChart,
@@ -14,6 +15,23 @@ import {
 } from "recharts";
 
 import css from "./styles.module.css";
+
+const LabelY = () => {
+  return (
+    <text
+    transform='rotate(90) translate(295 115)'
+      offset="5"
+      x="50"
+      y="235"
+      class="recharts-text recharts-label"
+      text-anchor="middle"
+    >
+      <tspan x="50" dy="0.355em">
+        Доходность в %
+      </tspan>
+    </text>
+  );
+};
 
 export const UserInfo = () => {
   const { id } = useParams();
@@ -37,8 +55,6 @@ export const UserInfo = () => {
     getChartInfo();
   }, []);
 
-  console.log(data);
-
   return (
     <div className={css.wrapper}>
       <Button onClick={() => history.push("/")}>К списку</Button>
@@ -58,9 +74,13 @@ export const UserInfo = () => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis dataKey="year_relative_yield" />
-          <Tooltip label='Ghbdtn'  />
-          {/* <Legend /> */}
+          <YAxis
+            dataKey="year_relative_yield"
+            type="number"
+            label={<LabelY />}
+            className={css.yAx}
+          />
+          <Tooltip label="Ghbdtn" />
           <Line
             type="natural"
             dataKey="year_relative_yield"
