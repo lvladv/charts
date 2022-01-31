@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import cn from "classnames";
 
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+import { amber } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 
 import css from "./styles.module.css";
 
@@ -42,7 +42,7 @@ export const TableComponent = () => {
     },
   }));
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  const StyledTableCell = styled(TableCell)(({ theme, width = "auto" }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.info.dark,
       color: theme.palette.common.white,
@@ -52,9 +52,6 @@ export const TableComponent = () => {
     },
   }));
 
-  // nickname;followers_count;month_operations_count;service_tags; strategies(тут кол-во, разделить по запятой); year_relative_yield
-  // __, Автор, Кол-во подписчиков, Кол-во операций, Тэги, Кол-во стратегий, Доходность
-
   function getStrategiesLangth(str) {
     return !!str ? str.split(",").length : 0;
   }
@@ -62,7 +59,9 @@ export const TableComponent = () => {
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
-        <h1 className={css.title}>Мониторинг авторов "Пульса" в "Тинькофф Инвестициях"</h1>
+        <h1 className={css.title}>
+          Мониторинг авторов "Пульса" в "Тинькофф Инвестициях"
+        </h1>
       </div>
       <Table
         sx={{
@@ -77,6 +76,7 @@ export const TableComponent = () => {
       >
         <TableHead>
           <StyledTableRow>
+            <StyledTableCell className={css.premium}></StyledTableCell>
             <StyledTableCell>Автор</StyledTableCell>
             <StyledTableCell align="right">Доходность</StyledTableCell>
             <StyledTableCell align="right">Кол-во операций</StyledTableCell>
@@ -92,6 +92,14 @@ export const TableComponent = () => {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               onClick={() => history.push(`/${row.nickname}`)}
             >
+              <StyledTableCell component="th" scope="row">
+                {!!row.premium && (
+                  <WorkspacePremiumIcon
+                    className={css.premium}
+                    sx={{ color: amber[700] }}
+                  />
+                )}
+              </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {row.nickname}
               </StyledTableCell>
