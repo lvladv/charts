@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { TableComponent } from "./components/table";
+import { Table } from "./components/table";
 import { UserInfo } from "./components/userInfo";
 import { Switch, Route } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path={"/"}>
-          <TableComponent />
+          <Table />
         </Route>
         <Route exact path={"/:id"}>
           <UserInfo />
