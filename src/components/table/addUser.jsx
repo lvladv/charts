@@ -21,15 +21,20 @@ export const AddUser = () => {
   const [success, setSuccess] = useState(false);
 
   async function addUser() {
-    try {
-      await axios({
-        method: "POST",
-        data: { name: userName },
-        url: `https://api.artydev.ru/api/evergreen/new/`,
-      });
-      setSuccess(true);
-    } catch (err) {
-      setError(err.data.text);
+    if (!!userName) {
+      try {
+        const req = await axios({
+          method: "POST",
+          data: { name: userName },
+          url: `https://api.artydev.ru/api/evergreen/new/`,
+        });
+        setSuccess(true);
+      } catch (err) {
+        console.log(err.response.data.data.text, "req");
+        setError(err.response.data.data.text || "Возникла ошибка");
+      }
+    } else {
+      setError("Для начала введите имя поьзователя");
     }
   }
 
@@ -37,10 +42,15 @@ export const AddUser = () => {
     if (reason === "clickaway") {
       return;
     }
-
     setError("");
     setSuccess(false);
   };
+
+  function handleChange(e) {
+    const { value } = e.target;
+    setUserName(value);
+    setError("");
+  }
 
   const action = (
     <React.Fragment>
@@ -66,7 +76,7 @@ export const AddUser = () => {
       >
         <TextField
           value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          onChange={handleChange}
           fullWidth
           label="Добавить пользователя для отслеживания"
           id="fullWidth"
@@ -81,10 +91,14 @@ export const AddUser = () => {
         autoHideDuration={6000}
         onClose={handleClose}
         action={action}
-        severity="success"
+        severity={error ? "error" : "success"}
         anchorOrigin={{ vertical: "top", horizontal: "" }}
       >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%", maxWidth: '1150px' }}>
+        <Alert
+          onClose={handleClose}
+          severity={error ? "error" : "success"}
+          sx={{ width: "100%", maxWidth: "1150px" }}
+        >
           {error ? error : "Пользователь успешно добавлен"}
         </Alert>
       </Snackbar>
