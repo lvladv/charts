@@ -60,6 +60,9 @@ export const UserInfo = () => {
     categoryAxis.renderer.grid.template.location = 0.5;
     categoryAxis.startLocation = 0.5;
     categoryAxis.endLocation = 0.5;
+    categoryAxis.renderer.labels.template.rotation = -45;
+    categoryAxis.renderer.labels.template.verticalCenter = "small";
+    categoryAxis.renderer.labels.template.horizontalCenter = "right";
 
     // Create value axis
     var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
@@ -89,14 +92,12 @@ export const UserInfo = () => {
     range.contents.fill = range.contents.stroke;
 
     // Add scrollbar
-    var scrollbarX = new am4charts.XYChartScrollbar();
-    scrollbarX.series.push(series);
-    chart.scrollbarX = scrollbarX;
+    // var scrollbarX = new am4charts.XYChartScrollbar();
+    // scrollbarX.series.push(series);
+    // chart.scrollbarX = scrollbarX;
 
     chart.cursor = new am4charts.XYCursor();
   }, [data]);
-
-  console.log(data)
 
   return (
     <div className={css.wrapper}>
