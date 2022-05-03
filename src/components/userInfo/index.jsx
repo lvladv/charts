@@ -60,13 +60,14 @@ export const UserInfo = () => {
     categoryAxis.renderer.grid.template.location = 0.5;
     categoryAxis.startLocation = 0.5;
     categoryAxis.endLocation = 0.5;
-    categoryAxis.renderer.labels.template.rotation = -45;
+    categoryAxis.renderer.labels.template.rotation = -42;
     categoryAxis.renderer.labels.template.verticalCenter = "small";
     categoryAxis.renderer.labels.template.horizontalCenter = "right";
 
     // Create value axis
     var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.baseValue = 0;
+    valueAxis.title.text = "Результат в %";
 
     // Create series
     var series = chart.series.push(new am4charts.LineSeries());

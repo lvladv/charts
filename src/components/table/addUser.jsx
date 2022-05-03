@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import TextField from "@mui/material/TextField";
@@ -23,7 +23,7 @@ export const AddUser = () => {
   async function addUser() {
     if (!!userName) {
       try {
-        const req = await axios({
+        await axios({
           method: "POST",
           data: { name: userName },
           url: `https://api.artydev.ru/api/evergreen/new/`,
